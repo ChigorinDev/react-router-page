@@ -1,6 +1,14 @@
 import React from "react";
 
-const Contacts  = () => {
+const Contacts = (props) => {
+  //it gets props from the router by default
+  // console.log(props);
+
+  //this function redirects user 
+  setTimeout(() => { 
+    props.history.push('/about');
+  }, 2000)
+
   return (
     <div className="container">
       <h4 className="center"> Contacts </h4>
