@@ -5,9 +5,9 @@ const Contacts = (props) => {
   // console.log(props);
 
   //this function redirects user 
-  setTimeout(() => { 
-    props.history.push('/about');
-  }, 2000)
+  // setTimeout(() => { 
+  //   props.history.push('/about');
+  // }, 2000)
 
   return (
     <div className="container">
