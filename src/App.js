@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import NavBar from "./components/NavBar";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from './components/Home';
 import About from './components/About';
 import Contacts from './components/Contacts';
+import Post from './components/Post';
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <NavBar />
+          <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
           <Route path='/contacts' component={Contacts} />
+          <Route path='/:post_id' component={Post}></Route>
+          </Switch>
         </div>
       </BrowserRouter>
     );

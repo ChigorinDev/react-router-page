@@ -1,23 +1,53 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Pokeball from '../pokeball.png';
 
 class Home extends Component {
+
+  state = {
+    posts: [ ]
+  }
+
+  //that's the point in component lifecicle when we make request to the server
   componentDidMount() { 
     axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(res => { 
-        console.log(res);
+      .then(response => { 
+        console.log(response);
+        //get data from response and put into state.posts array
+        this.setState({
+          posts: response.data.slice(0, 10)
+        })
       })
   }
+
+
+
   render() {
+    
+    const { posts } = this.state;
+    const postList = posts.length ? (
+      posts.map(post => { 
+        return (
+          <div className="post card" key={post.id}>
+            <img src={Pokeball} alt="ball"/>
+            <div className="card-content">
+              <Link to={'/' + post.id}>
+                <span className="card-title red-text">{post.title}</span>
+              </Link>
+              <p>{post.body}</p>
+            </div>
+          </div>
+        );
+      })
+    ) : (
+      <div className = "center">No posts yet!</div>
+      );
+
     return (
-      <div className="container">
+      <div className="container home">
         <h4 className="center">Home</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-          praesentium veniam consectetur odio excepturi neque modi repudiandae
-          ratione provident in sed, pariatur nam eaque, numquam id, deserunt
-          tenetur sequi assumenda.
-        </p>
+        {postList}
       </div>
     );
   }
